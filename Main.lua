@@ -321,7 +321,7 @@ local function C_7()
 			
 		function exPro(root)	
 			for _, v in pairs(root:GetChildren()) do	
-				if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id=77698539441388" then	
+				if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id=136921654892695" then	
 					v:Destroy()	
 				elseif v:IsA("BasePart") then	
 					v.Material = Enum.Material.Plastic	
