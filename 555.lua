@@ -2787,3 +2787,33 @@ gun2Tab:Paragraph({
     Title =  "หลุดอัพเดตใหม่🤑🤑",
     Desc = "สิ่งต่างๆคาดว่าจะเพิ่มเข้ามาเร็วๆนี้"
 })
+
+
+-- --- Bunny Hop (Bhop) ---
+-- ระบบกระโดดรัวๆ อัตโนมัติเมื่อกดกระโดดค้างไว้
+local BhopEnabled = false
+MainTab:CreateToggle("Bhop Glitch", false, function(state)
+    BhopEnabled = state
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if BhopEnabled then
+            local char = game.Players.LocalPlayer.Character
+            if char and char:FindFirstChild("Humanoid") then
+                if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
+                    char.Humanoid.Jump = true
+                end
+            end
+        end
+    end)
+end)
+
+-- --- Low Gravity (Moon Glitch) ---
+-- ทำให้ตัวเบาเหมือนอยู่ในอวกาศ ช่วยให้โดดได้ไกลขึ้นมาก
+MainTab:CreateButton("Toggle Low Gravity", function()
+    if workspace.Gravity == 196.2 then
+        workspace.Gravity = 100 -- ลดแรงโน้มถ่วง
+        WindUI:Notify({Title = "Gravity", Content = "Gravity Set to Low", Duration = 2})
+    else
+        workspace.Gravity = 196.2 -- กลับเป็นค่าปกติ
+        WindUI:Notify({Title = "Gravity", Content = "Gravity Set to Normal", Duration = 2})
+    end
+end)
