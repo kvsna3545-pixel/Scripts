@@ -2788,6 +2788,10 @@ gun2Tab:Paragraph({
     Desc = "สิ่งต่างๆคาดว่าจะเพิ่มเข้ามาเร็วๆนี้"
 })
 
+local MoveSection = Gun2Tab:Section({
+Title = "bhop"
+})
+
 -- =========================
 -- JUMP SPEED GLITCH (Bhop)
 -- =========================
@@ -2795,7 +2799,7 @@ gun2Tab:Paragraph({
 local jumpGlitchEnabled = false
 local jumpGlitchPower = 5 -- ค่าความแรงในการดันไปข้างหน้าตอนกระโดด
 
-SettingsTab:Toggle({
+Gun2Tab:Toggle({
     Title = "bhop",
     Default = false,
     Callback = function(state)
@@ -2803,7 +2807,7 @@ SettingsTab:Toggle({
     end
 })
 
-SettingsTab:Slider({
+Gun2Tab:Slider({
     Title = "ความแรง bhop",
     Step = 0.1,
     Value = {
