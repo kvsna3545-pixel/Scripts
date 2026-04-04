@@ -20,7 +20,7 @@ local gunDropEnabled = false
 -- =========================
 
 local Window = WindUI:CreateWindow({
-Title = "kvsna Hub v.4.12 ใช้ได้",
+Title = "kvsna Hub v.4.39",
 Icon = "eye",
 Author = "by Team kvsna3545",
 Folder = "kvsna Hub",
@@ -619,7 +619,7 @@ circle.Visible = state
 end
 })
 
-GunTab:Slider({
+Gun2Tab:Slider({
 Title="ขนาดวงตรวจจับ",
 Value={
 Min=100,
