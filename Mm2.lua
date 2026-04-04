@@ -36,76 +36,18 @@ local enabled = false
 local gunDropEnabled = false
 
 -- =========================
--- ---------WINDOW----------
--- =========================
-
-local Window = WindUI:CreateWindow({
-Title = "kvsna Hub v.4.12 ใช้ได้",
-Icon = "eye",
-Author = "by Team kvsna3545",
-Folder = "kvsna Hub",
-
-Size = UDim2.fromOffset(580,460),
-MinSize = Vector2.new(560,350),
-MaxSize = Vector2.new(850,560),
-
-Transparent = true,
-Theme = "Dark",
-Resizable = true,
-SideBarWidth = 210,
-BackgroundImageTransparency = 0.50,
-HideSearchBar = true,
-ScrollBarEnabled = false,
-})
-
--- =========================
 -- TABS
 -- =========================
 
-local SettingsTab = Window:Tab({
-Title="เมนูหลัก",
-Icon="settings"
-})
-
-local MainTab = Window:Tab({
-Title="มองทะลุคนอื่นๆ",
-Icon="eye"
-})
-
-local TeleportTab = Window:Tab({
-Title="วาร์ปไปที่ต่างๆ",
-Icon="navigation"
-})
-
-local VisualsTab = Window:Tab({
-Title="กวนคนในเซิฟเวอร์",
-Icon="skull"
-})
-
-local MurderTab = Window:Tab({
-Title="ฆาตกร",
-Icon="knife"
-})
-
-local FPSTab = Window:Tab({
-Title="อีเว้น",
-Icon="zap"
-})
-
-local MapTab = Window:Tab({
-Title="ฟามเงิน",
-Icon="coins"
-})
-
-local GunTab = Window:Tab({
-Title="นายอำเภอ",
-Icon="gun"
-})
-
-local Gun2Tab = Window:Tab({
-Title="aimbot",
-Icon="gun"
-})
+local SettingsTab = CreateWindow:Tab("เมนูหลัก",4483362458)
+local MainTab = Window:CreateTab("มองทะลุ", 4483362458)
+local TeleportTab = Window:CreateTab(Title="วาร์ปไปที่ต่างๆ",4483362458)
+local VisualsTab = Window:CreateTab(Title="กวนคนในเซิฟเวอร์",4483362458)
+local MurderTab = Window:CreateTab(Title="ฆาตกร",4483362458)
+local FPSTab = Window:CreateTab(Title="อีเว้น",4483362458)
+local MapTab = Window:CreateTab(Title="ฟามเงิน",4483362458)
+local GunTab = Window:CreateTab(Title="นายอำเภอ",4483362458)
+local Gun2Tab = Window:CreateTab(Title="aimbot",4483362458)
 
 -- =========================
 -- AUTO GUN DROP
@@ -374,7 +316,7 @@ end
 -- WINDUI BUTTONS
 -- =========================
 
-MainTab:Toggle({
+MainTab:CreateButton({
 Title="มองหาผู้เล่น",
 Default=false,
 Callback=function(state)
@@ -385,7 +327,7 @@ updatePlayers()
 end
 })
 
-MainTab:Toggle({
+MainTab:CreateButton({
 Title="มองหาปืน",
 Default=false,
 Callback=function(state)
@@ -506,7 +448,7 @@ end
 -- BUTTONS
 -- =========================
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 Title="วาร์ปไปยังนายอำเภอ",
 Callback=function()
 
@@ -519,7 +461,7 @@ end
 end
 })
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 Title="วาร์ปไปยังฆาตรกร",
 Callback=function()
 
@@ -628,7 +570,7 @@ end)
 -- UI SETTINGS
 -- =========================
 
-Gun2Tab:Toggle({
+Gun2Tab:CreateToggle({
 Title="ล็อกตัวฆาตกร",
 Default=false,
 Callback=function(state)
@@ -639,7 +581,7 @@ circle.Visible = state
 end
 })
 
-GunTab:Slider({
+GunTab:CreateSlider({
 Title="ขนาดวงตรวจจับ",
 Value={
 Min=100,
@@ -654,7 +596,7 @@ circle.Size = UDim2.new(0,v,0,v)
 end
 })
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 Title = "วาร์ปไปปืนที่ตก",
 Callback = function()
 
@@ -689,7 +631,7 @@ end
 end
 })
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 Title="วาร์ปไปล็อบบี้",
 Callback=function()
 
@@ -720,7 +662,7 @@ end
 end
 })
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 Title="วาร์ปไปยังแมพ",
 Callback=function()
 
@@ -839,7 +781,7 @@ end)
 -- WINDUI BUTTON
 -- =========================
 
-SettingsTab:Toggle({
+SettingsTab:CreateToggle({
 Title="ออโต้ยิงฆาตกร",
 Default=false,
 Callback=function(state)
@@ -1058,7 +1000,7 @@ end)
 -- BUTTONS
 -- =========================
 
-VisualsTab:Button({
+VisualsTab:CreateButton({
 Title="เตะ Sheriff",
 Callback=function()
 
@@ -1071,7 +1013,7 @@ Callback=function()
 end
 })
 
-VisualsTab:Button({
+VisualsTab:CreateButton({
 Title="เตะ Murderer",
 Callback=function()
 
@@ -1084,7 +1026,7 @@ Callback=function()
 end
 })
 
-VisualsTab:Button({
+VisualsTab:CreateButton({
 Title="กระเด็นคนที่เลือก",
 Callback=function()
 
@@ -1171,7 +1113,7 @@ end
 -- เตะเมื่อเดินชน
 -- =========================
 
-TrollSection:Toggle({
+TrollSection:CreateToggle({
 Title="เตะ",
 Default=false,
 Callback=function(state)
@@ -1209,7 +1151,7 @@ end)
 -- เตะทุกคนในเซิฟ
 -- =========================
 
-TrollSection:Toggle({
+TrollSection:CreateToggle({
 Title="เตะทุกคนในเซิฟ",
 Default=false,
 Callback=function(state)
@@ -1264,7 +1206,7 @@ local infJump = false
 -- ปรับความเร็ว
 -- =========================
 
-MoveSection:Slider({
+MoveSection:CreateSlider({
 Title = "ความเร็ว",
 Step = 1,
 Value = {
@@ -1287,7 +1229,7 @@ end
 -- ปรับกระโดดสูง
 -- =========================
 
-MoveSection:Slider({
+MoveSection:CreateSlider({
 Title = "ความสูงกระโดด",
 Step = 1,
 Value = {
@@ -1310,7 +1252,7 @@ end
 -- กระโดดไม่จำกัด
 -- =========================
 
-MoveSection:Toggle({
+MoveSection:CreateToggle({
 Title = "กระโดดไม่จำกัด",
 Default = false,
 Callback = function(state)
@@ -1365,7 +1307,7 @@ end
 -- เสกมีด
 -- =========================
 
-WeaponSection:Button({
+WeaponSection:CreateButton({
 Title = "เสกมีด",
 Callback = function()
 
@@ -1383,7 +1325,7 @@ end
 -- เสกปืน
 -- =========================
 
-WeaponSection:Button({
+WeaponSection:CreateButton({
 Title = "เสกปืน",
 Callback = function()
 
@@ -1446,7 +1388,7 @@ end
 -- ปุ่มสแกนไอเทม
 -- =========================
 
-SpawnItemSection:Button({
+SpawnItemSection:CreateButton({
 Title = "สแกนไอเทมในเกม",
 Callback = function()
 
@@ -1460,7 +1402,7 @@ end
 -- ปุ่มเสกไอเทม
 -- =========================
 
-SpawnItemSection:Button({
+SpawnItemSection:CreateButton({
 Title = "เสกไอเทม(ของปลอม)",
 Callback = function()
 
@@ -1519,7 +1461,7 @@ end
 -- เปิด / ปิด
 -- =========================
 
-HitboxSection:Toggle({
+HitboxSection:CreateToggle({
 Title="ขยายฮิตบล็อก",
 Default=false,
 Callback=function(state)
@@ -1542,7 +1484,7 @@ end
 -- ปรับขนาดวง
 -- =========================
 
-HitboxSection:Slider({
+HitboxSection:CreateSlider({
 Title="ขนาดฮิตบล็อก",
 Step=1,
 Value={
@@ -1659,7 +1601,7 @@ end
 -- Toggle ฆ่าทุกคน
 -- =========================
 
-KillSection:Toggle({
+KillSection:CreateToggle({
 Title="ฆ่าทุกคน",
 Default=false,
 Callback=function(state)
@@ -1677,7 +1619,7 @@ end
 -- Toggle ออโต้ฆ่าทุกคน
 -- =========================
 
-KillSection:Toggle({
+KillSection:CreateToggle({
 Title="ออโต้ฆ่าทุกคน",
 Default=false,
 Callback=function(state)
@@ -1750,7 +1692,7 @@ end)
 -- BUTTON
 -- =========================
 
-MainTab:Toggle({
+MainTab:CreateToggle({
 Title="เดินทะลุเพื่อน",
 Default=false,
 Callback=function(state)
@@ -1817,7 +1759,7 @@ local playerDropdown = TeleportTab:Dropdown({
 -- ปุ่มวาร์ป
 -- =========================
 
-TeleportTab:Button({
+TeleportTab:CreateButton({
 	Title = "วาร์ปไปหาเพื่อน",
 	Callback = function()
 
@@ -1892,7 +1834,7 @@ end)
 -- BUTTON
 -- =========================
 
-MainTab:Toggle({
+MainTab:CreateToggle({
 Title="เดินทะลุเพื่อน",
 Default=false,
 Callback=function(state)
@@ -2054,7 +1996,7 @@ end
 -- WINDUI TOGGLE
 -- =========================
 
-SettingsTab:Toggle({
+SettingsTab:CreateToggle({
 Title="วาร์ปไปเก็บปืน(ปุ่มลอย)",
 Default=false,
 Callback=function(state)
@@ -2111,7 +2053,7 @@ local function hasKnife()
 	return false
 end
 
-MapTab:Toggle({
+MapTab:CreateToggle({
 Title="ออโต้ชนะ",
 Default=false,
 Callback=function(state)
@@ -2357,7 +2299,7 @@ end
 -- ปุ่มใน GunTab  
 -- =========================  
   
-GunTab:Button({  
+GunTab:CreateButton({  
 	Title="ยิงบักชั่ว",  
 	Callback=function()  
   
@@ -2366,7 +2308,7 @@ GunTab:Button({
 	end  
 })  
   
-GunTab:Button({  
+GunTab:CreateButton({  
 	Title="ยิงบักชั่ว (ปุ่ม)",  
 	Callback=function()  
   
@@ -2496,7 +2438,7 @@ end)
 -- BUTTONS
 -- =========================
 
-MainTab:Toggle({
+MainTab:CreateToggle({
 	Title="มองหาฆาตกร",
 	Default=false,
 	Callback=function(v)
@@ -2507,7 +2449,7 @@ MainTab:Toggle({
 	end
 })
 
-MainTab:Toggle({
+MainTab:CreateToggle({
 	Title="มองหานายอำเภอ",
 	Default=false,
 	Callback=function(v)
@@ -2518,7 +2460,7 @@ MainTab:Toggle({
 	end
 })
 
-MainTab:Toggle({
+MainTab:CreateToggle({
 	Title="มองผู้บริสุทธิ์",
 	Default=false,
 	Callback=function(v)
@@ -2543,12 +2485,12 @@ local flySpeed = 16
 -- UI
 --========================
 
-MapTab:Paragraph({
+MapTab:CreateParagraph({
     Title = "คำเตือน",
     Desc = "⚠️ แนะนำให้ปรับ 19 ถ้าเกินเสี่ยงโดนแบน!"
 })
 
-MapTab:Slider({
+MapTab:CreateSlider({
     Title = "ความเร็วลอย",
     Value = {Min = 1, Max = 26, Default = 16},
     Callback = function(v)
@@ -2556,7 +2498,7 @@ MapTab:Slider({
     end
 })
 
-MapTab:Dropdown({
+MapTab:CreateDropdown({
     Title = "ท่าลอย",
     Values = {"ปกติ", "นอน"},
     Default = "ปกติ",
@@ -2565,7 +2507,7 @@ MapTab:Dropdown({
     end
 })
 
-MapTab:Toggle({
+MapTab:CreateToggle({
     Title = "รีตัวเมื่อเหรียญหมด",
     Default = false,
     Callback = function(v)
@@ -2719,7 +2661,7 @@ end
 -- TOGGLE ฟามเหรียญ
 --========================
 
-MapTab:Toggle({
+MapTab:CreateToggle({
     Title = "ฟราม เหรียญ",
     Default = false,
     Callback = function(state)
@@ -2773,7 +2715,7 @@ MapTab:Toggle({
 -- =========================
 local AntiAFKConnection
 
-MapTab:Toggle({
+MapTab:CreateToggle({
     Title = "กันโดนเตะ",
     Default = true, -- เปิดตลอดเวลา
     Callback = function(state)
@@ -2803,7 +2745,7 @@ MapTab:Toggle({
 
 MapTab:GetToggle("กันโดนเตะ"):SetState(true)
 
-gun2Tab:Paragraph({
+gun2Tab:CreateParagraph({
     Title =  "หลุดอัพเดตใหม่🤑🤑",
     Desc = "สิ่งต่างๆคาดว่าจะเพิ่มเข้ามาเร็วๆนี้"
 })
