@@ -2749,71 +2749,110 @@ MapTab:Toggle({
 })
 
 -- =========================
--- เมนูหลัก: กันโดนเตะ
+-- AUTO START ANTI-AFK
 -- =========================
-local AntiAFKConnection
 
-MapTab:Toggle({
-    Title = "กันโดนเตะ",
-    Default = true, -- เปิดตลอดเวลา
-    Callback = function(state)
-        if state then
-            if not AntiAFKConnection then
-                AntiAFKConnection = player.Idled:Connect(function()
-                    pcall(function()
-                        local VirtualUser = game:GetService("VirtualUser")
-                        VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-								
-                        task.wait(1)
-                        VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-                    end)
-                end)
+-- WindUI บางเวอร์ชันอาจไม่เรียก Callback ของ Default=true
+-- ดังนั้นเปิดระบบ Anti-AFK ตรงนี้ด้วย
+if not AntiAFKConnection then
+    AntiAFKConnection = player.Idled:Connect(function()
+        pcall(function()
+            local VirtualUser = game:GetService("VirtualUser")
+            local cam = workspace.CurrentCamera
+
+            if cam then
+                VirtualUser:Button2Down(Vector2.new(0, 0), cam.CFrame)
+                task.wait(1)
+                VirtualUser:Button2Up(Vector2.new(0, 0), cam.CFrame)
             end
-        else
-            if AntiAFKConnection then
-                AntiAFKConnection:Disconnect()
-                AntiAFKConnection = nil
-            end
-        end
-    end
-})
-
--- เปิดทำงานอัตโนมัติเลย
+        end)
+    end)
+end
 
 
-MapTab:GetToggle("กันโดนเตะ"):SetState(true)
+-- =========================
+-- UPDATE NOTE
+-- =========================
 
-gun2Tab:Paragraph({
-    Title =  "หลุดอัพเดตใหม่🤑🤑",
+Gun2Tab:Paragraph({
+    Title = "หลุดอัพเดตใหม่🤑🤑",
     Desc = "สิ่งต่างๆคาดว่าจะเพิ่มเข้ามาเร็วๆนี้"
 })
 
 
--- --- Bunny Hop (Bhop) ---
--- ระบบกระโดดรัวๆ อัตโนมัติเมื่อกดกระโดดค้างไว้
+-- =========================
+-- BHOP
+-- =========================
+
 local BhopEnabled = false
-MainTab:CreateToggle("Bhop Glitch", false, function(state)
-    BhopEnabled = state
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if BhopEnabled then
-            local char = game.Players.LocalPlayer.Character
-            if char and char:FindFirstChild("Humanoid") then
-                if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
-                    char.Humanoid.Jump = true
-                end
-            end
-        end
-    end)
+local UserInputService = game:GetService("UserInputService")
+
+MainTab:Toggle({
+    Title = "Bhop Glitch",
+    Default = false,
+
+    Callback = function(state)
+        BhopEnabled = state
+    end
+})
+
+-- สร้าง connection แค่ครั้งเดียว
+RunService.RenderStepped:Connect(function()
+
+    if not BhopEnabled then
+        return
+    end
+
+    local char = player.Character
+    if not char then
+        return
+    end
+
+    local humanoid = char:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        return
+    end
+
+    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+        humanoid.Jump = true
+    end
+
 end)
 
--- --- Low Gravity (Moon Glitch) ---
--- ทำให้ตัวเบาเหมือนอยู่ในอวกาศ ช่วยให้โดดได้ไกลขึ้นมาก
-MainTab:CreateButton("Toggle Low Gravity", function()
-    if workspace.Gravity == 196.2 then
-        workspace.Gravity = 100 -- ลดแรงโน้มถ่วง
-        WindUI:Notify({Title = "Gravity", Content = "Gravity Set to Low", Duration = 2})
-    else
-        workspace.Gravity = 196.2 -- กลับเป็นค่าปกติ
-        WindUI:Notify({Title = "Gravity", Content = "Gravity Set to Normal", Duration = 2})
+
+-- =========================
+-- LOW GRAVITY
+-- =========================
+
+local normalGravity = 196.2
+local lowGravity = 100
+
+MainTab:Button({
+    Title = "Toggle Low Gravity",
+
+    Callback = function()
+
+        if workspace.Gravity == normalGravity then
+
+            workspace.Gravity = lowGravity
+
+            WindUI:Notify({
+                Title = "Gravity",
+                Content = "Gravity Set to Low",
+                Duration = 2
+            })
+
+        else
+
+            workspace.Gravity = normalGravity
+
+            WindUI:Notify({
+                Title = "Gravity",
+                Content = "Gravity Set to Normal",
+                Duration = 2
+            })
+
+        end
+
     end
-end)
+})
